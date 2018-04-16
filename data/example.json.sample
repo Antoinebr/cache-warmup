@@ -1,0 +1,35 @@
+{
+    "urlset": {
+      "-xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+      "-xmlns:image": "http://www.google.com/schemas/sitemap-image/1.1",
+      "-xmlns": "http://www.sitemaps.org/schemas/sitemap/0.9",
+      "-xsi:schemaLocation": "http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd",
+      "url": [
+        {
+          "loc": "https://monbraceletnato.fr/",
+          "lastmod": "2017-10-03T14:47:30+02:00"
+        },
+        {
+          "loc": "https://monbraceletnato.fr/blog/",
+          "lastmod": "2015-05-18T22:14:38+02:00",
+          "image:image": {
+            "image:loc": "https://monbraceletnato.fr/wp-content/uploads/2015/04/nato-cover-blog.jpg",
+            "image:title": "nato-cover-blog"
+          }
+        },
+        {
+          "loc": "https://monbraceletnato.fr/bracelet-nato-paris/",
+          "lastmod": "2015-05-17T22:05:49+02:00",
+          "image:image": {
+            "image:loc": "https://monbraceletnato.fr/wp-content/uploads/2015/05/home-bg-black.jpg",
+            "image:title": "home-bg-black"
+          }
+        },
+    
+        {
+          "loc": "https://monbraceletnato.fr/offline/",
+          "lastmod": "2018-04-14T01:58:13+02:00"
+        }
+      ]
+    }
+  }
