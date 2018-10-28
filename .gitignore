@@ -14,6 +14,7 @@ yarn-error.log*
 .sass-cache 
 
 # Project specific
+.env 
 
 data/*.json
 !data/example.json

@@ -1,51 +1,31 @@
+require('dotenv').config()
 const chalk = require('chalk');
+const getSitemapPage = require('./pages');
 const run = require('./run.js');
 
 // Pages
-const pages = require('./data/pages.json');
-const products = require('./data/products.json');
-const cats = require('./data/cats.json');
 
+const pages = getSitemapPage(process.env.PAGES_SITEMAP_URL);
+const posts = getSitemapPage(process.env.POSTS_SITEMAP_URL);
+//const cats = getSitemapPage('https://www.antoinebrossault.com/category-sitemap.xml');
 
-pages.urlset.url.forEach( page => {
+// succeeds when all succeed
+Promise.all([pages, posts])
+    .then(function (results) {
 
-    const mobileVersion = run(page.loc,true);
+        for (page of results) {
 
-    const desktopVersion = run(page.loc);
+            page.urlset.url.forEach(page => {
 
-    Promise.all([mobileVersion,desktopVersion])
-    .then( r => console.log( chalk.green(`[cache generated OK] :  ${page.loc} on mobile and desktop`) ) )
-    .catch( e => console.log(e) );
-    
-});
+                const mobileVersion = run(page.loc, true);
 
+                const desktopVersion = run(page.loc);
 
+                Promise.all([mobileVersion, desktopVersion])
+                    .then(r => console.log(chalk.green(`[cache generated OK] :  ${page.loc} on mobile and desktop`)))
+                    .catch(e => console.log(e));
+            });
 
-products.urlset.url.forEach( page => {
-
-    const mobileVersion = run(page.loc,true);
-
-    const desktopVersion = run(page.loc);
-
-    Promise.all([mobileVersion,desktopVersion])
-    .then( r => console.log( chalk.green(`[cache generated OK] :  ${page.loc} on mobile and desktop`) ) )
-    .catch( e => console.log(e) );
-    
-});
-
-
-
-cats.urlset.url.forEach( page => {
-
-    const mobileVersion = run(page.loc,true);
-
-    const desktopVersion = run(page.loc);
-
-    Promise.all([mobileVersion,desktopVersion])
-    .then( r => console.log( chalk.green(`[cache generated OK] :  ${page.loc} on mobile and desktop`) ) )
-    .catch( e => console.log(e) );
-    
-});
-
-
-
+        }
+    })
+    .catch(e => console.log(e));
