@@ -1,4 +1,4 @@
-# Generate the cache ( mobile and desktop )for a WordPress site 
+# Generate the cache ( mobile and desktop ) for a WordPress site from the sitemap.xml
 
 You site needs to have a sitemap.xml ( YOAST generated )
 
