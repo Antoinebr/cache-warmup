@@ -3,29 +3,36 @@ const chalk = require('chalk');
 const getSitemapPage = require('./pages');
 const run = require('./run.js');
 
-// Pages
 
+const [delayBetweenRequestInMs = 1000] = process.argv.slice(2);
+
+
+// Pages
 const pages = getSitemapPage(process.env.PAGES_SITEMAP_URL);
 const posts = getSitemapPage(process.env.POSTS_SITEMAP_URL);
-//const cats = getSitemapPage('https://www.antoinebrossault.com/category-sitemap.xml');
+const products = getSitemapPage(process.env.PRODUCTS_SITEMAP_URL);
+const productsCats = getSitemapPage(process.env.PRODUCTS_CATS_SITEMAP_URL);
 
-// succeeds when all succeed
-Promise.all([pages, posts])
-    .then(function (results) {
 
-        for (page of results) {
+Promise.all([pages, posts, products, productsCats])
+    .then(async (results) => {
 
-            page.urlset.url.forEach(page => {
+        for (let page of results) {
 
-                const mobileVersion = run(page.loc, true);
+            for (let pageToLoad of page.urlset.url) {
 
-                const desktopVersion = run(page.loc);
+                const mobileVersion = run(pageToLoad.loc, true);
 
-                Promise.all([mobileVersion, desktopVersion])
-                    .then(r => console.log(chalk.green(`[cache generated OK] :  ${page.loc} on mobile and desktop`)))
-                    .catch(e => console.log(e));
-            });
+                const desktopVersion = run(pageToLoad.loc);
 
+                await Promise.all([mobileVersion, desktopVersion]).catch(e => console.log(chalk.red(e)));
+
+                console.log(chalk.green(`[cache generated OK] :  ${pageToLoad.loc} on mobile and desktop`));
+
+                await new Promise((resolve) => setTimeout(() => resolve(), delayBetweenRequestInMs));
+
+            }
         }
+
     })
     .catch(e => console.log(e));

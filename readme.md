@@ -20,6 +20,8 @@ set an .env file at the root of the folder
 ```
 PAGES_SITEMAP_URL=https://www.mysite.com/page-sitemap.xml
 POSTS_SITEMAP_URL=https://www.mysite.com/post-sitemap.xml
+PRODUCTS_SITEMAP_URL=https://www.mysite.com/product-sitemap.xml
+PRODUCTS_CATS_SITEMAP_URL=https://www.mysite.com/product_cat-sitemap.xml
 ```
 
 
@@ -27,4 +29,12 @@ POSTS_SITEMAP_URL=https://www.mysite.com/post-sitemap.xml
 
 ```
 npm start
-``` 
+```
+
+or
+
+You can pass a request delay ( here 1000ms ) in Command Line
+
+```
+node app.js 1000
+```
